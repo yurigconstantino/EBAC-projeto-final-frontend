@@ -1,5 +1,6 @@
 import { Button } from '../../components/Button'
 import { GlassCard } from '../../components/GlassCard'
+import { Link } from '@tanstack/react-router'
 
 export const LoginCard = () => {
   return (
@@ -48,10 +49,11 @@ export const LoginCard = () => {
                 {/* {loading ? 'Carregando...' : 'Entrar'} */}
               </Button>
               {/* mudar para a pagina de cadatros */}
-              <Button onClick={() => ''} variant="ghost" className="w-full">
-                'Criar a sua conta'
-                {/* {loading ? 'Carregando...' : 'Criar a sua conta'} */}
-              </Button>
+              <Link to="/signup">
+                <Button onClick={() => ''} variant="ghost" className="w-full">
+                  'Criar a sua conta'
+                </Button>
+              </Link>
             </form>
           </div>
         </GlassCard>
