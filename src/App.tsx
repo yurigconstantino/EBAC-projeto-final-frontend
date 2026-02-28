@@ -1,11 +1,5 @@
-import { Signup } from './pages/Signup'
-
 function App() {
-  return (
-    <>
-      <Signup />
-    </>
-  )
+  return <></>
 }
 
 export default App
