@@ -1,4 +1,5 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
+import { Feed } from '../pages/HomeFeed'
 // import { FeedMain } from '../containers/FeedMain'
 
 export const Route = createFileRoute('/')({
@@ -14,5 +15,5 @@ export const Route = createFileRoute('/')({
 })
 
 function FeedPage() {
-  return <div>Feed</div>
+  return <Feed />
 }
