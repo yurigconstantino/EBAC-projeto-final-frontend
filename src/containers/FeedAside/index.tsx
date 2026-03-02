@@ -1,19 +1,30 @@
+import { useEffect, useState } from 'react'
 import { Avatar } from '../../components/Avatar'
 import { Button } from '../../components/Button'
 import { GlassCard } from '../../components/GlassCard'
 import { Icon } from '../../components/Icon'
+import { getMe } from '../../lib/user'
 
-// --------FAZER VARIAVEL PARA DESLOGAR DA CONTA--------
-export const FeedAside = () => (
-  <>
+export const FeedAside = () => {
+  const [user, setUser] = useState<string | undefined>('')
+  const [avatar, setAvatar] = useState<string>('')
+
+  useEffect(() => {
+    async function fetchUser() {
+      const data = await getMe()
+      setUser(data.username ?? '')
+      setAvatar(data.avatar ?? undefined)
+
+    }
+    fetchUser()
+  }, [])
+
+  return (
     <aside className="hidden lg:flex w-70 flex-col gap-6 sticky top-8 h-fit">
       <GlassCard className="p-6 flex flex-col gap-4 border-violet-500/20">
         <div className="flex items-center gap-3">
-          <Avatar
-            alt="aa"
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-          />
-          <h2 className="font-bold text-white text-lg">Nome do Usuario</h2>
+          <Avatar alt="avatar" src={avatar} />
+          <h2 className="font-bold text-white text-lg">{user}</h2>
         </div>
       </GlassCard>
       <GlassCard className="p-4 flex flex-col gap-2">
@@ -53,5 +64,5 @@ export const FeedAside = () => (
         </div>
       </GlassCard>
     </aside>
-  </>
-)
+  )
+}
