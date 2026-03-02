@@ -1,8 +1,30 @@
+import { useState } from 'react'
 import { Button } from '../../components/Button'
 import { GlassCard } from '../../components/GlassCard'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
+import { login } from '../../lib/auth'
 
 export const LoginCard = () => {
+  const navitate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [password, SetPassword] = useState('')
+  const [error, setError] = useState('')
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+
+    try {
+      const data = await login(email, password)
+
+      localStorage.setItem('access', data.access)
+      localStorage.setItem('refresh', data.refresh)
+
+      navitate({ to: '/' })
+    } catch (err) {
+      console.log(err)
+      setError('Email ou senha invalidos')
+    }
+  }
   return (
     <>
       <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-indigo-900 via-slate-900 to-black flex items-center justify-center p-6 relative">
@@ -21,40 +43,36 @@ export const LoginCard = () => {
           </div>
           <div className="w-full md:w-7/12 p-12 bg-black/20">
             <h2 className="text-2xl font-bold mb-8">Assece à sua conta</h2>
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <input
-                  type="text"
-                  placeholder="E-mail ou Usuario"
+                  type="email"
+                  placeholder="E-mail"
                   className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-violet-500 transition"
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                {/* <span className="text-red-500 font-extralight text-sm ml-2">
-                  Nome de usuario ou email incorreto
-                </span> */}
               </div>
               <div>
                 <input
                   type="password"
                   placeholder="Password"
                   className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-violet-500 transition"
+                  onChange={(e) => SetPassword(e.target.value)}
                   required
                 />
-                {/* <span className="text-red-500 font-extralight text-sm ml-2">
-                  Senha incorreta
-                </span> */}
               </div>
               <Button onClick={() => ''} variant="primary" className="w-full">
                 'Entrar'
                 {/* {loading ? 'Carregando...' : 'Entrar'} */}
               </Button>
-              {/* mudar para a pagina de cadatros */}
               <Link to="/signup">
                 <Button onClick={() => ''} variant="ghost" className="w-full">
                   'Criar a sua conta'
                 </Button>
               </Link>
             </form>
+            {error && <p>{error}</p>}
           </div>
         </GlassCard>
       </div>

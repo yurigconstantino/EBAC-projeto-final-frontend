@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { Feed } from '../pages/HomeFeed'
-// import { FeedMain } from '../containers/FeedMain'
+
 
 export const Route = createFileRoute('/')({
   beforeLoad: () => {

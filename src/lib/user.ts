@@ -1,6 +1,7 @@
 import { api } from './api'
 
-export async function getProfile() {
-  const response = await api.get('/profile/')
+export async function getMe() {
+  const response = await api.get('accounts/me/')
   return response.data
 }
+
