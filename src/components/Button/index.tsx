@@ -3,6 +3,8 @@ import type { ButtonProps } from '../../types/ButtonProps'
 export const Button = ({
   children,
   onClick,
+  OnChange,
+  type,
   variant = 'primary',
   className = '',
   disabled = false
@@ -22,6 +24,8 @@ export const Button = ({
   return (
     <button
       onClick={onClick}
+      onChange={OnChange}
+      type={type}
       disabled={disabled}
       className={`${baseStyle} ${variants[variant]} ${className}`}
     >
