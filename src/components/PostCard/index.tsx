@@ -6,6 +6,7 @@ import { useState } from 'react'
 import type { Comment } from '../../types/comment'
 import { api } from '../../services/api'
 import { CommentsPost } from '../CommentsPost'
+import { Button } from '../Button'
 
 interface Props {
   post: Post
@@ -84,13 +85,16 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
             src={post.author_avatar || 'https://dummyimage.com/80x80.png'}
           />
           <div className="flex-1">
-            <div className="flex justify-between mb-2">
-              <div>
-                <h3 className="font-bold text-white text-lg">
-                  {post.author_username}
-                </h3>
-                <span className="text-indigo-300/60 text-sm"></span>
-              </div>
+            <div className="flex justify-between items-center mb-5 border-b border-white/5 pb-2">
+              <h3 className="font-bold text-white text-lg">
+                {post.author_username}
+              </h3>
+              <Button
+                children="Follow"
+                variant="follow"
+                onClick={() => ''}
+                className="p-0.5"
+              />
             </div>
             <p className="text-gray-100 mb-4 font-light">{post.content}</p>
             {post.image && (
