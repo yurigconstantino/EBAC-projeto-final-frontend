@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Aside from '../components/Aside'
+import Aside from '../components/NavMenu'
 import { api } from '../services/api'
 import { type Post } from '../types/Post'
 import { PostCard } from '../components/PostCard'
@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0B0B15]">
-      <div className="max-w-350 mx-auto flex gap-8 p-4 lg:p-8">
+      <div className="flex max-w-350 mx-auto gap-8 p-8 flex-col lg:flex-row">
         <Aside />
         <main className="flex-1 max-w-200">
           <GlassCard className="p-6 mb-8 bg-linear-to-b from-white/10 to-white/5">
