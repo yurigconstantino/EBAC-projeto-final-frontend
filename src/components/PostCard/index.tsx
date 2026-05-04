@@ -78,55 +78,59 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
 
   return (
     <>
-      <GlassCard className="p-6 mb-6 hover:border-violet-500/30">
-        <div key={post.id} className="flex gap-4">
-          <Avatar
-            alt=""
-            src={post.author_avatar || 'https://dummyimage.com/80x80.png'}
-          />
-          <div className="flex-1">
-            <div className="flex justify-between items-center mb-5 border-b border-white/5 pb-2">
+      <GlassCard className="mb-6 p-6 hover:border-violet-500/30">
+        <div key={post.id} className="flex-1">
+          <div className="flex justify-between items-center border-b border-white/5 pb-2">
+            <div className="flex items-center gap-4">
+              <Avatar
+                alt=""
+                src={post.author_avatar || 'https://dummyimage.com/80x80.png'}
+              />
               <h3 className="font-bold text-white text-lg">
                 {post.author_username}
               </h3>
-              <Button
-                children="Follow"
-                variant="follow"
-                onClick={() => ''}
-                className="p-0.5"
-              />
             </div>
-            <p className="text-gray-100 mb-4 font-light">{post.content}</p>
-            {post.image && (
-              <img
-                src={post.image}
-                className="rounded-2xl border border-white/5 mb-4 w-full object-cover"
-              />
-            )}
-            <div className="flex items-center gap-6 pt-4 border-t border-white/5 text-gray-400">
-              <PostButtons
-                onClick={handleToggleComments}
-                className={
-                  showComments
-                    ? 'flex items-center gap-2 cursor-pointer transition text-violet-500 fill-violet-900'
-                    : 'flex items-center gap-2 cursor-pointer transition hover:text-violet-500'
-                }
-                children={post.comments_count}
-                iconName="message-square"
-              />
-              <PostButtons
-                onClick={handleLike}
-                className={
-                  liked
-                    ? 'flex items-center gap-2 cursor-pointer transition text-violet-700 fill-violet-950'
-                    : 'flex items-center gap-2 cursor-pointer transition hover:text-violet-400'
-                }
-                children={likesCount}
-                iconName="heart"
-              />
-            </div>
-            {showComments && (
-              <div className="mt-6 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
+            <Button
+              children="Follow"
+              variant="follow"
+              onClick={() => ''}
+              className="p-1"
+            />
+          </div>
+          <div className="mt-2">
+            <div>
+              <p className="text-gray-100 mb-4 font-light">{post.content}</p>
+              {post.image && (
+                <img
+                  src={post.image}
+                  className="rounded-2xl border border-white/5 mb-4 w-full object-cover"
+                />
+              )}
+              <div className="flex items-center gap-6 pt-4 border-t border-white/5 text-gray-400">
+                <PostButtons
+                  onClick={handleToggleComments}
+                  className={
+                    showComments
+                      ? 'flex items-center gap-2 cursor-pointer transition text-violet-500 fill-violet-900'
+                      : 'flex items-center gap-2 cursor-pointer transition hover:text-violet-500'
+                  }
+                  children={post.comments_count}
+                  iconName="message-square"
+                />
+                <PostButtons
+                  onClick={handleLike}
+                  className={
+                    liked
+                      ? 'flex items-center gap-2 cursor-pointer transition text-violet-700 fill-violet-950'
+                      : 'flex items-center gap-2 cursor-pointer transition hover:text-violet-400'
+                  }
+                  children={likesCount}
+                  iconName="heart"
+                />
+              </div>
+              <div
+                className={`overflow-hidden transform transition-all duration-400 ease-out w-auto ${showComments ? 'my-6 max-h opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'}`}
+              >
                 {/* Input de Novo Comentário */}
                 <div className="flex gap-3 items-start bg-white/5 p-3 rounded-2xl border border-white/5">
                   <Avatar alt="" src="https://dummyimage.com/80x80.png" />
@@ -157,7 +161,7 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
                   />
                 ))}
               </div>
-            )}
+            </div>
           </div>
         </div>
       </GlassCard>
