@@ -2,7 +2,7 @@ import { Avatar } from '../Avatar'
 import { GlassCard } from '../GlassCard'
 import { PostButtons } from '../PostButtons'
 import { type Post } from '../../types/Post'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Comment } from '../../types/comment'
 import { api } from '../../services/api'
 import { CommentsPost } from '../CommentsPost'
@@ -14,6 +14,7 @@ interface Props {
 }
 
 export const PostCard = ({ post, onUpdateComments }: Props) => {
+  const [isFollowing, setIsFollowing] = useState(post.is_following_author)
   const [showComments, setShowComments] = useState(false)
   const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState('')
@@ -21,6 +22,34 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
   const [liked, setLiked] = useState(post.liked_by_user)
 
   const token = localStorage.getItem('token')
+
+  useEffect(() => {
+    async function fetchFollowStatus() {
+      const response = await api.get(`account/follow/${post.author}/`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      setIsFollowing(response.data.following)
+    }
+    fetchFollowStatus()
+  })
+
+  async function handleFollow() {
+    try {
+      const response = await api.post(
+        `/accounts/follow/${post.author}/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+
+      setIsFollowing(response.data.following)
+    } catch (error) {
+      console.error(`${error} Erro ao seguir usuario`)
+    }
+  }
 
   async function fetchComments() {
     const response = await api.get(`/posts/${post.id}/comments/`, {
@@ -91,9 +120,9 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
               </h3>
             </div>
             <Button
-              children="Follow"
-              variant="follow"
-              onClick={() => ''}
+              children={isFollowing ? 'Following' : 'Follow'}
+              variant={isFollowing ? 'following' : 'follow'}
+              onClick={handleFollow}
               className="p-1"
             />
           </div>
@@ -103,7 +132,7 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
               {post.image && (
                 <img
                   src={post.image}
-                  className="rounded-2xl border border-white/5 mb-4 w-full object-cover"
+                  className="rounded-2xl border border-white/5 mb-4 p-2 w-full object-cover"
                 />
               )}
               <div className="flex items-center gap-6 pt-4 border-t border-white/5 text-gray-400">

@@ -3,6 +3,7 @@ import { api } from '../services/api'
 import { type RegisterData } from '../types/user'
 import { GlassCard } from '../components/GlassCard'
 import { Button } from '../components/Button/index'
+import { Link } from '@tanstack/react-router'
 
 export default function Singup() {
   const [formData, setFormData] = useState<RegisterData>({
@@ -103,6 +104,16 @@ export default function Singup() {
                 {loading ? `${message}` : 'Criar conta'}
               </Button>
             </form>
+            <Link to="/login">
+              <Button
+                onClick={() => ''}
+                variant="secondary"
+                className="w-full py-2 mt-5"
+                disabled={loading}
+              >
+                Voltar
+              </Button>
+            </Link>
           </div>
         </GlassCard>
       </div>
