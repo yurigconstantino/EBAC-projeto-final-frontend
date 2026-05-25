@@ -5,7 +5,7 @@ export interface ButtonProps {
   onClick?: () => void
   OnChange?: () => void
   type?: "submit" | "reset" | "button"
-  variant: 'primary' | 'secondary' | 'ghost' | 'action' | 'follow'
+  variant: 'primary' | 'secondary' | 'ghost' | 'action' | 'follow' | 'following'
   className: string
   disabled?: boolean
 }

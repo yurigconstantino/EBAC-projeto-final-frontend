@@ -91,17 +91,26 @@ export default function Home() {
                     }}
                     className="hidden"
                   />
-                  <label
-                    htmlFor="file-input"
-                    className="cursor-pointer text-gray-500 hover:text-white"
-                  >
-                    <Icon name="image-up" size={24} fill="transparent" />
-                  </label>
+                  <div className="flex items-center gap-2">
+                    <label
+                      htmlFor="file-input"
+                      className="cursor-pointer text-gray-500 hover:text-white"
+                    >
+                      <Icon name="image-up" size={24} fill="transparent" />
+                    </label>
+                    {image && (
+                      <img
+                        src={URL.createObjectURL(image)}
+                        alt=""
+                        className="mt-2 h-18 w-auto rounded"
+                      />
+                    )}
+                  </div>
                   <Button
-                    variant={!content ? 'action' : 'primary'}
+                    variant={!content && !image ? 'action' : 'primary'}
                     className=""
                     type="submit"
-                    disabled={!content}
+                    disabled={!content && !image}
                   >
                     Postar
                   </Button>

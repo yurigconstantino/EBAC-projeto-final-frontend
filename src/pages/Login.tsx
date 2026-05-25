@@ -3,7 +3,7 @@ import { api } from '../services/api'
 import { Button } from '../components/Button'
 import { GlassCard } from '../components/GlassCard'
 import { type LoginResponse, type LoginData } from '../types/auth'
-import { useNavigate } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 
 export default function Login() {
   const [formData, setFormData] = useState<LoginData>({
@@ -91,6 +91,16 @@ export default function Login() {
                 {loading ? 'Entrando...' : 'Entrar'}
               </Button>
             </form>
+            <Link to="/signup">
+              <Button
+                onClick={() => ''}
+                variant="secondary"
+                className="w-full py-2 mt-5"
+                disabled={loading}
+              >
+                Cadastro
+              </Button>
+            </Link>
           </div>
         </GlassCard>
       </div>

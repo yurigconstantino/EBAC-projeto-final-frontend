@@ -21,7 +21,8 @@ export const Button = ({
     action:
       'p-3 rounded-xl hover:bg-white/10 text-gray-400 hover:text-white transition-colors',
     follow:
-      'border-2 border-violet-600 text-sm hover:bg-gradient-to-r px-2 from-violet-600 to-indigo-600 text-gray-400 hover:text-white transition-colors'
+      'border-2 border-violet-600 text-sm hover:bg-gradient-to-r px-2 from-violet-600 to-indigo-600 text-gray-400 hover:text-white transition-colors',
+    following: 'border-2 border-violet-600 text-sm bg-gradient-to-r px-2 from-violet-600 to-indigo-600 text-gray-400 text-white transition-colors'
   }
   return (
     <button
