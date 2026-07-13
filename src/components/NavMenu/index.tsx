@@ -21,7 +21,7 @@ export default function NavMenu() {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
   const navigate = useNavigate()
 
   function handleLogout() {
@@ -29,17 +29,16 @@ export default function NavMenu() {
     navigate({ to: '/login' })
   }
 
+  if (loading) return null
+  if (!user) return null
   return (
     <>
       {isMobile ? (
-        <nav className='max-w-200'>
+        <nav className="max-w-200">
           <GlassCard className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Avatar
-                  alt="avatar"
-                  src={user?.avatar || 'https://dummyimage.com/80x80.png'}
-                />
+                <Avatar alt="avatar" src={user?.avatar} />
                 <h2 className="font-bold text-white text-lg">
                   {user?.username}
                 </h2>
@@ -70,11 +69,11 @@ export default function NavMenu() {
               </Button>
               <Button
                 variant="ghost"
-                onClick={() => navigate({ to: '/' })}
+                onClick={() => navigate({ to: '/explore' })}
                 className="justify-start gap-5"
               >
-                <Icon name="newspaper" size={24} fill="#1717201d" />
-                News
+                <Icon name="search" size={24} fill="#1717201d" />
+                Explore
               </Button>
               <Button
                 variant="ghost"
@@ -101,10 +100,7 @@ export default function NavMenu() {
         <aside className="flex w-70 flex-col gap-6 sticky top-8 h-fit">
           <GlassCard className="p-6 flex flex-col gap-4 border-violet-500/20">
             <div className="flex items-center gap-3">
-              <Avatar
-                alt="avatar"
-                src={user?.avatar || 'https://dummyimage.com/80x80.png'}
-              />
+              <Avatar alt="avatar" src={user?.avatar || ''} />
               <h2 className="font-bold text-white text-lg">{user?.username}</h2>
             </div>
           </GlassCard>
@@ -119,11 +115,11 @@ export default function NavMenu() {
             </Button>
             <Button
               variant="ghost"
-              onClick={() => navigate({ to: '/' })}
+              onClick={() => navigate({ to: '/explore' })}
               className="justify-start gap-5"
             >
-              <Icon name="newspaper" size={24} fill="#1717201d" />
-              News
+              <Icon name="search" size={24} fill="#1717201d" />
+              Explore
             </Button>
             <Button
               variant="ghost"

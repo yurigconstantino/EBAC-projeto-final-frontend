@@ -5,7 +5,7 @@ interface User {
   id: number
   username: string
   email: string
-  avatar: string | null
+  avatar: string
 }
 
 export function useAuth() {
@@ -20,11 +20,16 @@ export function useAuth() {
       return
     }
     try {
-      const response = await api.get('/accounts/me/', {
+      const response = await api.get('/accounts/me', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
+
+      const userData = response.data
+      if (userData.avatar && !userData.avatar.startsWith('http')) {
+        userData.avatar = `http://localhost:8000${userData.avatar}`
+      }
 
       setUser(response.data)
     } catch {
@@ -33,7 +38,7 @@ export function useAuth() {
     setLoading(false)
   }
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       await fetchUser()
     })()
   }, [])
