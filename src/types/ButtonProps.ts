@@ -6,6 +6,6 @@ export interface ButtonProps {
   OnChange?: () => void
   type?: "submit" | "reset" | "button"
   variant: 'primary' | 'secondary' | 'ghost' | 'action' | 'follow' | 'following'
-  className: string
+  className?: string
   disabled?: boolean
 }

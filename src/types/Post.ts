@@ -2,7 +2,7 @@ export interface Post {
   id: number
   author: number
   author_username: string
-  author_avatar: string | null
+  author_avatar: string
   is_following_author: boolean
   content: string
   image: string | null

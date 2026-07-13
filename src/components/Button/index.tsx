@@ -6,7 +6,7 @@ export const Button = ({
   OnChange,
   type,
   variant = 'primary',
-  className = '',
+  className,
   disabled = false
 }: ButtonProps) => {
   const baseStyle =
@@ -15,14 +15,15 @@ export const Button = ({
     primary:
       'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 p-3 hover:to-indigo-500 text-white shadow-lg shadow-indigo-500/30 disabled:opacity-50',
     secondary:
-      'bg-white/10 hover:bg-white/20 text-white border border-white/10 backdrop-blur-md',
+      'bg-white/10 hover:bg-white/20 text-white border border-white/10 backdrop-blur-md disabled:opacity-50',
     ghost:
       'text-gray-300 hover:text-white hover:bg-white/5 px-4 py-3 w-full  text-lg rounded-xl',
     action:
       'p-3 rounded-xl hover:bg-white/10 text-gray-400 hover:text-white transition-colors',
     follow:
       'border-2 border-violet-600 text-sm hover:bg-gradient-to-r px-2 from-violet-600 to-indigo-600 text-gray-400 hover:text-white transition-colors',
-    following: 'border-2 border-violet-600 text-sm bg-gradient-to-r px-2 from-violet-600 to-indigo-600 text-gray-400 text-white transition-colors'
+    following:
+      'border-2 border-violet-600 text-sm bg-gradient-to-r px-2 from-violet-600 to-indigo-600 text-gray-400 text-white transition-colors'
   }
   return (
     <button
@@ -30,7 +31,7 @@ export const Button = ({
       onChange={OnChange}
       type={type}
       disabled={disabled}
-      className={`${baseStyle} ${variants[variant]} ${className}`}
+      className={`${baseStyle} ${variants[variant]} ${className} `}
     >
       {children}
     </button>

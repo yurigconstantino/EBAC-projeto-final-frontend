@@ -1,6 +1,7 @@
 export type AvatarProps = {
-  src: string
+  src?: string
   alt: string
-  size?: 'md'
+  size?: 'sm' | 'md' | 'lg'
   glowing?: boolean
+  className?: string
 }

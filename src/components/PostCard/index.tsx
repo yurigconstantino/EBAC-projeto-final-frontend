@@ -2,11 +2,12 @@ import { Avatar } from '../Avatar'
 import { GlassCard } from '../GlassCard'
 import { PostButtons } from '../PostButtons'
 import { type Post } from '../../types/Post'
-import { useEffect, useState } from 'react'
-import type { Comment } from '../../types/comment'
+import { useState } from 'react'
+import { type Comment } from '../../types/comment'
 import { api } from '../../services/api'
 import { CommentsPost } from '../CommentsPost'
 import { Button } from '../Button'
+import { useAuth } from '../../hooks/useAuth'
 
 interface Props {
   post: Post
@@ -22,16 +23,7 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
   const [liked, setLiked] = useState(post.liked_by_user)
 
   const token = localStorage.getItem('token')
-
-  useEffect(() => {
-    async function fetchFollowStatus() {
-      const response = await api.get(`account/follow/${post.author}/`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      setIsFollowing(response.data.following)
-    }
-    fetchFollowStatus()
-  })
+  const { user } = useAuth()
 
   async function handleFollow() {
     try {
@@ -112,8 +104,8 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
           <div className="flex justify-between items-center border-b border-white/5 pb-2">
             <div className="flex items-center gap-4">
               <Avatar
-                alt=""
-                src={post.author_avatar || 'https://dummyimage.com/80x80.png'}
+                alt={post.author_username}
+                src={post.author_avatar}
               />
               <h3 className="font-bold text-white text-lg">
                 {post.author_username}
@@ -162,7 +154,7 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
               >
                 {/* Input de Novo Comentário */}
                 <div className="flex gap-3 items-start bg-white/5 p-3 rounded-2xl border border-white/5">
-                  <Avatar alt="" src="https://dummyimage.com/80x80.png" />
+                  <Avatar alt="" src={user?.avatar} />
                   <div className="flex-1 flex flex-col gap-2">
                     <textarea
                       value={newComment}
