@@ -33,6 +33,7 @@ export function useAuth() {
 
       setUser(response.data)
     } catch {
+      localStorage.removeItem('token')
       setUser(null)
     }
     setLoading(false)

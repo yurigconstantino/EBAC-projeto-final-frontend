@@ -25,7 +25,9 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
   const token = localStorage.getItem('token')
   const { user } = useAuth()
 
+  const isOwnPost = Boolean(user && user.id === post.author)
   async function handleFollow() {
+    if (isOwnPost) return
     try {
       const response = await api.post(
         `/accounts/follow/${post.author}/`,
@@ -103,20 +105,19 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
         <div key={post.id} className="flex-1">
           <div className="flex justify-between items-center border-b border-white/5 pb-2">
             <div className="flex items-center gap-4">
-              <Avatar
-                alt={post.author_username}
-                src={post.author_avatar}
-              />
+              <Avatar alt={post.author_username} src={post.author_avatar} />
               <h3 className="font-bold text-white text-lg">
                 {post.author_username}
               </h3>
             </div>
-            <Button
-              children={isFollowing ? 'Following' : 'Follow'}
-              variant={isFollowing ? 'following' : 'follow'}
-              onClick={handleFollow}
-              className="p-1"
-            />
+            {!isOwnPost && (
+              <Button
+                children={isFollowing ? 'Following' : 'Follow'}
+                variant={isFollowing ? 'following' : 'follow'}
+                onClick={handleFollow}
+                className="p-1"
+              />
+            )}
           </div>
           <div className="mt-2">
             <div>

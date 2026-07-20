@@ -21,6 +21,10 @@ export default function Me() {
   const [avatar, setAvatar] = useState<File | null>(null)
   const [avatarPreview, setAvatarPreview] = useState('')
 
+  const [originalUsername, setOriginalUsername] = useState('')
+  const [originalEmail, setOriginalEmail] = useState('')
+  const [originalAvatarPreview, setOriginalAvatarPreview] = useState('')
+
   const token = localStorage.getItem('token')
   const { user } = useAuth()
 
@@ -36,12 +40,16 @@ export default function Me() {
         setUsername(response.data.username)
         setEmail(response.data.email)
 
+        setOriginalUsername(response.data.username)
+        setOriginalEmail(response.data.email)
+
         if (response.data.avatar) {
           const avatarUrl = response.data.avatar.startsWith('http')
             ? response.data.avatar
             : `http://localhost:8000${response.data.avatar}`
 
           setAvatarPreview(avatarUrl)
+          setOriginalAvatarPreview(avatarUrl)
         }
       } catch (error) {
         console.error(error)
@@ -142,6 +150,15 @@ export default function Me() {
     }
   }
 
+  function handleCancel() {
+    setEdit(false)
+    setUsername(originalUsername)
+    setEmail(originalEmail)
+    setPassword('')
+    setAvatar(null)
+    setAvatarPreview(originalAvatarPreview)
+  }
+
   return (
     <>
       <div className="min-h-screen bg-[#0B0B15]">
@@ -197,6 +214,7 @@ export default function Me() {
                         <input
                           type="text"
                           placeholder={username}
+                          value={username}
                           onChange={(e) => setUsername(e.target.value)}
                           className={
                             edit ? 'text-white pl-2' : 'text-gray-500 pl-2'
@@ -209,6 +227,7 @@ export default function Me() {
                         <input
                           type="email"
                           placeholder={email}
+                          value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className={
                             edit ? 'text-white pl-2' : 'text-gray-500 pl-2'
@@ -220,7 +239,7 @@ export default function Me() {
                         <label>Senha:</label>
                         <input
                           type="password"
-                          placeholder={"************************"}
+                          placeholder={'************************'}
                           onChange={(e) => setPassword(e.target.value)}
                           className={
                             edit ? 'text-white pl-2' : 'text-gray-500 pl-2'
@@ -240,6 +259,8 @@ export default function Me() {
                     <Button
                       children={'Cancelar'}
                       variant="secondary"
+                      type='reset'
+                      onClick={handleCancel}
                       className="px-2"
                       disabled={!edit}
                     />
@@ -254,7 +275,7 @@ export default function Me() {
                       <div key={post.id} className="relative gap-2 border-b-2">
                         <button
                           onClick={() => handleDeletePost(post.id)}
-                          className="absolute top-2 right-4 z-10 cursor-pointer hover:text-red-600"
+                          className="absolute top-4 right-4 z-10 cursor-pointer hover:text-red-600"
                         >
                           <Icon name="trash" size={20} fill="transparent" />
                         </button>
