@@ -1,15 +1,16 @@
+import { api } from '../services/api'
+import { useAuth } from '../hooks/useAuth'
 import { useEffect, useState } from 'react'
+import { type Post } from '../types/Post'
+import type { MeFollowingList } from '../types/MeFollowingList'
+import { updatePostCommentsCount } from '../utils/posts'
 import { GlassCard } from '../components/GlassCard'
 import { Icon } from '../components/Icon'
 import Aside from '../components/NavMenu'
-import { type Post } from '../types/Post'
 import { PostCard } from '../components/PostCard'
-import { api } from '../services/api'
 import { MeFollowingListCard } from '../components/MeFollowingList'
-import type { MeFollowingList } from '../types/MeFollowingList'
 import { Button } from '../components/Button'
 import { Avatar } from '../components/Avatar'
-import { useAuth } from '../hooks/useAuth'
 
 export default function Me() {
   const [edit, setEdit] = useState(false)
@@ -106,11 +107,7 @@ export default function Me() {
   const inputProps = edit ? {} : { disabled: true }
 
   const updatePostComments = (postId: number, newCount: number) => {
-    setPosts((prev) =>
-      prev.map((p) =>
-        p.id === postId ? { ...p, comments_count: newCount } : p
-      )
-    )
+    setPosts((prev) => updatePostCommentsCount(prev, postId, newCount))
   }
 
   useEffect(() => {
@@ -259,7 +256,7 @@ export default function Me() {
                     <Button
                       children={'Cancelar'}
                       variant="secondary"
-                      type='reset'
+                      type="reset"
                       onClick={handleCancel}
                       className="px-2"
                       disabled={!edit}
@@ -272,7 +269,7 @@ export default function Me() {
                   <h2 className="font-bold mb-3 lg:text-lg">Meus Posts</h2>
                   <GlassCard className="flex flex-col gap-3 max-h-200 p-2 mb-8 bg-linear-to-b from-white/5 to-white/1 overflow-auto scrollbar-custom">
                     {posts.map((post) => (
-                      <div key={post.id} className="relative gap-2 border-b-2">
+                      <div key={post.id} className="relative gap-2">
                         <button
                           onClick={() => handleDeletePost(post.id)}
                           className="absolute top-4 right-4 z-10 cursor-pointer hover:text-red-600"
