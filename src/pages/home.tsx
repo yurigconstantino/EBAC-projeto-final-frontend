@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import Aside from '../components/NavMenu'
 import { api } from '../services/api'
+import { useNavigate } from '@tanstack/react-router'
+import { useAuth } from '../hooks/useAuth'
+import Aside from '../components/NavMenu'
 import { type Post } from '../types/Post'
 import { PostCard } from '../components/PostCard'
 import { GlassCard } from '../components/GlassCard'
@@ -12,7 +14,17 @@ export default function Home() {
   const [content, setContent] = useState('')
   const [image, setImage] = useState<File | null>(null)
 
+  const { user, loading } = useAuth()
+  const navigate = useNavigate()
+
   const token = localStorage.getItem('token')
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate({ to: '/login'})
+    }
+  }, [loading, user, navigate])
+  
 
   const updatePostComments = (postId: number, newCount: number) => {
     setPosts((prev) =>
