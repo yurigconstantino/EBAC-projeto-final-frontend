@@ -1,13 +1,13 @@
+import { api } from '../../services/api'
+import { useAuth } from '../../hooks/useAuth'
+import { type Comment } from '../../types/comment'
+import { type Post } from '../../types/Post'
+import { useState } from 'react'
 import { Avatar } from '../Avatar'
 import { GlassCard } from '../GlassCard'
 import { PostButtons } from '../PostButtons'
-import { type Post } from '../../types/Post'
-import { useState } from 'react'
-import { type Comment } from '../../types/comment'
-import { api } from '../../services/api'
 import { CommentsPost } from '../CommentsPost'
-import { Button } from '../Button'
-import { useAuth } from '../../hooks/useAuth'
+import { FollowButton } from '../FollowButton'
 
 interface Props {
   post: Post
@@ -111,11 +111,9 @@ export const PostCard = ({ post, onUpdateComments }: Props) => {
               </h3>
             </div>
             {!isOwnPost && (
-              <Button
-                children={isFollowing ? 'Following' : 'Follow'}
-                variant={isFollowing ? 'following' : 'follow'}
-                onClick={handleFollow}
-                className="p-1"
+              <FollowButton
+                isFollowing={isFollowing}
+                handleFollow={handleFollow}
               />
             )}
           </div>

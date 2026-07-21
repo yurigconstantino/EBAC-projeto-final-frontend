@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
 import { api } from '../services/api'
-import { useNavigate } from '@tanstack/react-router'
 import { useAuth } from '../hooks/useAuth'
-import Aside from '../components/NavMenu'
+import { useEffect, useState } from 'react'
 import { type Post } from '../types/Post'
+import { updatePostCommentsCount } from '../utils/posts'
+import { useNavigate } from '@tanstack/react-router'
+import Aside from '../components/NavMenu'
 import { PostCard } from '../components/PostCard'
 import { GlassCard } from '../components/GlassCard'
 import { Button } from '../components/Button'
@@ -21,17 +22,12 @@ export default function Home() {
 
   useEffect(() => {
     if (!loading && !user) {
-      navigate({ to: '/login'})
+      navigate({ to: '/login' })
     }
   }, [loading, user, navigate])
-  
 
   const updatePostComments = (postId: number, newCount: number) => {
-    setPosts((prev) =>
-      prev.map((p) =>
-        p.id === postId ? { ...p, comments_count: newCount } : p
-      )
-    )
+    setPosts((prev) => updatePostCommentsCount(prev, postId, newCount))
   }
 
   async function fetchPosts() {

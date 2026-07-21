@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
-import Aside from '../components/NavMenu'
 import { api } from '../services/api'
+import { useEffect, useState } from 'react'
 import { type Post } from '../types/Post'
+import { updatePostCommentsCount } from '../utils/posts'
+import Aside from '../components/NavMenu'
 import { PostCard } from '../components/PostCard'
 
 export default function Explore() {
@@ -10,11 +11,7 @@ export default function Explore() {
   const token = localStorage.getItem('token')
 
   const updatePostComments = (postId: number, newCount: number) => {
-    setPosts((prev) =>
-      prev.map((p) =>
-        p.id === postId ? { ...p, comments_count: newCount } : p
-      )
-    )
+    setPosts((prev) => updatePostCommentsCount(prev, postId, newCount))
   }
 
   useEffect(() => {
