@@ -33,10 +33,12 @@ export const MeFollowingListCard = ({ mefollowinglist }: Props) => {
     <>
       <GlassCard
         key={mefollowinglist.id}
-        className="flex items-center gap-3 p-2 my-2"
+        className="flex justify-between gap-3 p-2 my-2"
       >
-        <Avatar alt="" src={mefollowinglist.avatar} />
-        <h3 className="text-sm lg:text-lg">{mefollowinglist.username}</h3>
+        <div className='flex items-center gap-2'>
+          <Avatar alt="" src={mefollowinglist.avatar} />
+          <h3 className="text-sm lg:text-lg">{mefollowinglist.username}</h3>
+        </div>
         <FollowButton isFollowing={isFollowing} handleFollow={handleFollow} />
       </GlassCard>
     </>
