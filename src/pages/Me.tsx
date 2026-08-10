@@ -163,7 +163,7 @@ export default function Me() {
           <Aside />
           <main className="flex-1">
             <div className="flex max-w-350 mx-auto gap-8 flex-col">
-              <GlassCard className="p-6 mb-8 bg-linear-to-b from-white/10 to-white/5">
+              <GlassCard className="flex-col p-6 md:mb-8 bg-linear-to-b from-white/10 to-white/5">
                 <div className="flex justify-between mb-3">
                   <h2 className="text-3xl">Meus Dados:</h2>
                   <button
@@ -173,9 +173,9 @@ export default function Me() {
                     <Icon name="pencil" size={24} fill="transparent" />
                   </button>
                 </div>
-                <form onSubmit={handleSubmit} className="flex flex-col">
-                  <div className="flex justify-around items-center lg:justify-evenly">
-                    <div className="flex flex-col items-center gap-2">
+                <form onSubmit={handleSubmit} className="">
+                  <div className="md:flex justify-around items-center lg:justify-evenly">
+                    <div className="my-4 flex md:flex flex-col items-center gap-4">
                       <div>
                         <Avatar
                           size="lg"
@@ -205,7 +205,7 @@ export default function Me() {
                         </label>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-2 mb-2 p-2 border-b border-white/5 w-100 lg:w-200">
+                    <div className="w-full md:flex flex-col gap-2 mb-2 p-2 border-b border-white/20 lg:w-200">
                       <div className="flex flex-col gap-2 mb-2 p-2 border-b border-white/5">
                         <label>Nome de Usuario:</label>
                         <input
@@ -264,8 +264,8 @@ export default function Me() {
                   </div>
                 </form>
               </GlassCard>
-              <div className="flex justify-around gap-5">
-                <div className="w-300">
+              <div className="w-full lg:flex gap-5">
+                <div className="lg:w-200">
                   <h2 className="font-bold mb-3 lg:text-lg">Meus Posts</h2>
                   <GlassCard className="flex flex-col gap-3 max-h-200 p-2 mb-8 bg-linear-to-b from-white/5 to-white/1 overflow-auto scrollbar-custom">
                     {posts.map((post) => (
@@ -285,7 +285,7 @@ export default function Me() {
                     ))}
                   </GlassCard>
                 </div>
-                <div className="w-200">
+                <div className="lg:w-200">
                   <h2 className="font-bold mb-3  lg:text-lg">Following</h2>
                   <GlassCard className="flex flex-col p-2 mb-8 bg-linear-to-b from-white/5 to-white/1 overflow-auto">
                     {followingList.map((following) => (
