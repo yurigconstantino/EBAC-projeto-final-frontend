@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import { api } from '../services/api'
+import type { AxiosError } from 'axios'
 import { type RegisterData } from '../types/user'
 import { GlassCard } from '../components/GlassCard'
 import { Button } from '../components/Button/index'
 import { Link } from '@tanstack/react-router'
+
+interface ErrorResponse {
+  email?: string[]
+  username?: string[]
+}
 
 export default function Singup() {
   const [formData, setFormData] = useState<RegisterData>({
@@ -13,7 +19,8 @@ export default function Singup() {
   })
 
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
+
+  const [error, setError] = useState('')
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
@@ -26,11 +33,12 @@ export default function Singup() {
     e.preventDefault()
 
     setLoading(true)
+    setError('')
 
     try {
       await api.post('/accounts/register/', formData)
 
-      setMessage('usuario criado com sucesso')
+      alert("usuario cadastrado!")
 
       setFormData({
         username: '',
@@ -38,9 +46,24 @@ export default function Singup() {
         password: ''
       })
     } catch (error) {
-      setMessage(`erro ao criar usuario | ${error}`)
+      const axiosError = error as AxiosError<ErrorResponse>
+
+      if (axiosError.response?.status === 400) {
+        const data = axiosError.response.data
+
+        if (data?.email?.[0]) {
+          setError(data.email[0])
+        } else if (data?.username?.[0]) {
+          setError(data.username[0])
+        } else {
+          setError('Não foi possível realizar o cadastro')
+        }
+      } else {
+        setError('Erro ao conectar com o servidor')
+      }
+    } finally {
+      setLoading(false)
     }
-    setLoading(false)
   }
   console.log(handleSubmit)
   return (
@@ -95,13 +118,16 @@ export default function Singup() {
                   required
                 />
               </div>
+              {error && (
+                <p className='text-red-700'>Nome de Usuario ou Email já cadastrado</p>
+              )}
               <Button
                 onClick={() => ''}
                 variant="primary"
                 className="w-full"
                 disabled={loading}
               >
-                {loading ? `${message}` : 'Criar conta'}
+                Criar conta
               </Button>
             </form>
             <Link to="/login">
