@@ -34,7 +34,7 @@ export default function NavMenu() {
   return (
     <>
       {isMobile ? (
-        <nav className="max-w-200">
+        <nav className="max-w">
           <GlassCard className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
