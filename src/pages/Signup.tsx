@@ -9,6 +9,7 @@ import { Link } from '@tanstack/react-router'
 interface ErrorResponse {
   email?: string[]
   username?: string[]
+  password?: string[]
 }
 
 export default function Singup() {
@@ -38,7 +39,7 @@ export default function Singup() {
     try {
       await api.post('/accounts/register/', formData)
 
-      alert("usuario cadastrado!")
+      alert('usuario cadastrado!')
 
       setFormData({
         username: '',
@@ -55,6 +56,8 @@ export default function Singup() {
           setError(data.email[0])
         } else if (data?.username?.[0]) {
           setError(data.username[0])
+        } else if (data.password?.[0]) {
+          setError(data.password[0])
         } else {
           setError('Não foi possível realizar o cadastro')
         }
@@ -119,7 +122,9 @@ export default function Singup() {
                 />
               </div>
               {error && (
-                <p className='text-red-700'>Nome de Usuario ou Email já cadastrado</p>
+                <p className="text-red-700">
+                  {error}
+                </p>
               )}
               <Button
                 onClick={() => ''}
