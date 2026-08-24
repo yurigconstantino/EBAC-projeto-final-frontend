@@ -68,7 +68,6 @@ export default function Singup() {
       setLoading(false)
     }
   }
-  console.log(handleSubmit)
   return (
     <>
       <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-indigo-900 via-slate-900 to-black flex items-center justify-center p-6 relative">

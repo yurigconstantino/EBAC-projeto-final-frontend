@@ -28,7 +28,7 @@ export function useAuth() {
 
       const userData = response.data
       if (userData.avatar && !userData.avatar.startsWith('http')) {
-        userData.avatar = `http://localhost:8000${userData.avatar}`
+        userData.avatar = `https://ebac-projeto-final-backend.onrender.com${userData.avatar}`
       }
 
       setUser(response.data)

@@ -47,7 +47,7 @@ export default function Me() {
         if (response.data.avatar) {
           const avatarUrl = response.data.avatar.startsWith('http')
             ? response.data.avatar
-            : `http://localhost:8000${response.data.avatar}`
+            : `https://ebac-projeto-final-backend.onrender.com${response.data.avatar}`
 
           setAvatarPreview(avatarUrl)
           setOriginalAvatarPreview(avatarUrl)
@@ -158,11 +158,11 @@ export default function Me() {
 
   return (
     <>
-      <div className="min-h-screen bg-[#0B0B15]">
-        <div className="flex max-w mx-auto gap-8 p-8 flex-col lg:flex-row">
+      <div className="min-h-screen bg-[#0B0B15] flex">
+        <div className="w-full flex mx-auto gap-8 p-4 md:p-8 flex-col lg:flex-row">
           <Aside />
-          <main className="flex-1">
-            <div className="flex max-w-350 mx-auto gap-8 flex-col">
+          <main className="w-full min-w-0 flex-1">
+            <div className="flex-1 mx-auto gap-8 flex-col">
               <GlassCard className="flex-col p-6 md:mb-8 bg-linear-to-b from-white/10 to-white/5">
                 <div className="flex justify-between mb-3">
                   <h2 className="text-3xl">Meus Dados:</h2>
@@ -205,7 +205,7 @@ export default function Me() {
                         </label>
                       </div>
                     </div>
-                    <div className="w-full md:flex flex-col gap-2 mb-2 p-2 border-b border-white/20 lg:w-200">
+                    <div className="w-full min-w-0 md:flex flex-col gap-2 mb-2 p-2 border-b border-white/20">
                       <div className="flex flex-col gap-2 mb-2 p-2 border-b border-white/5">
                         <label>Nome de Usuario:</label>
                         <input
