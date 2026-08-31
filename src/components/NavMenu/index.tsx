@@ -97,7 +97,7 @@ export default function NavMenu() {
           </GlassCard>
         </nav>
       ) : (
-        <aside className="flex w-max flex-col gap-6 sticky top-8 h-fit">
+        <aside className="flex w-70 flex-col gap-6 sticky top-8 h-fit">
           <GlassCard className="p-6 flex flex-col gap-4 border-violet-500/20">
             <div className="flex items-center gap-3">
               <Avatar alt="avatar" src={user?.avatar || ''} />

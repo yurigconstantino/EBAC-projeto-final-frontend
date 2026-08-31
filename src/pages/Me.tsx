@@ -163,7 +163,7 @@ export default function Me() {
           <Aside />
           <main className="w-full min-w-0 flex-1">
             <div className="flex-1 mx-auto gap-8 flex-col">
-              <GlassCard className="flex-col p-6 md:mb-8 bg-linear-to-b from-white/10 to-white/5">
+              <GlassCard className="flex-col p-6 mb-8 bg-linear-to-b from-white/10 to-white/5">
                 <div className="flex justify-between mb-3">
                   <h2 className="text-3xl">Meus Dados:</h2>
                   <button
@@ -173,9 +173,9 @@ export default function Me() {
                     <Icon name="pencil" size={24} fill="transparent" />
                   </button>
                 </div>
-                <form onSubmit={handleSubmit} className="">
-                  <div className="md:flex justify-around items-center lg:justify-evenly">
-                    <div className="my-4 flex md:flex flex-col items-center gap-4">
+                <form onSubmit={handleSubmit}>
+                  <div className="md:flex justify-around items-center lg:justify-evenly border-b border-white/20">
+                    <div className="my-4 mr-3 flex md:flex flex-col items-center gap-4">
                       <div>
                         <Avatar
                           size="lg"
@@ -192,7 +192,7 @@ export default function Me() {
                         onChange={handleAvatarChange}
                         disabled={!edit}
                       />
-                      <div>
+                      <div className='text-center'>
                         <label
                           htmlFor="avatar-upload"
                           className={
@@ -205,7 +205,7 @@ export default function Me() {
                         </label>
                       </div>
                     </div>
-                    <div className="w-full min-w-0 md:flex flex-col gap-2 mb-2 p-2 border-b border-white/20">
+                    <div className="w-full min-w-0 md:flex flex-col gap-2 mb-2 p-2">
                       <div className="flex flex-col gap-2 mb-2 p-2 border-b border-white/5">
                         <label>Nome de Usuario:</label>
                         <input

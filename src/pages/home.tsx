@@ -75,7 +75,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0B0B15]">
-      <div className="flex max-w mx-auto gap-8 p-8 flex-col lg:flex-row">
+      <div className="flex justify-center max-w mx-auto gap-8 p-8 flex-col lg:flex-row">
         <Aside />
         <main className="flex-1 max-w-300">
           <GlassCard className="p-6 mb-8 bg-linear-to-b from-white/10 to-white/5">
