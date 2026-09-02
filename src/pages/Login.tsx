@@ -49,7 +49,6 @@ export default function Login() {
         <GlassCard className="w-full max-w-4xl flex flex-col md:flex-row overflow-hidden border-white/10 bg-black/40">
           <div className="md:w-5/12 bg-linear-to-br from-violet-600/20 to-indigo-900/40 p-12 flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 bg-linear-to-tr from-cyan-400 to-violet-500 rounded-xl mb-6"></div>
               <h1 className="text-4xl font-bold mb-4">Bem-vindo à InterKnot</h1>
             </div>
           </div>
